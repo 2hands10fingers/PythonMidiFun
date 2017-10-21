@@ -1,3 +1,6 @@
+# Used to ascend the chromatic scale from the lowest to the highest midi note.
+# Created by 2hands10fingers
+
 import random
 import time
 import rtmidi_python as rtmidi
