@@ -14,15 +14,19 @@ inport = mido.open_input(midicontroller)
 outport = mido.open_output(midioutput)
 
 #FUNCTIONS
+## WEBSITE COMMANDS
 def comsite(site):
     webbrowser.open('http://' + site + ".com")
 
 def orgsite(site):
     webbrowser.open('http://' + site + ".org")
  
+## MORE TO COME
+
+#WHERE THE MAGIC HAPPENS    
 with mido.open_output('MPK mini') as outport:
     for msg in inport:
-
+        
         if msg.type == 'note_off':
             continue
 
@@ -44,4 +48,4 @@ with mido.open_output('MPK mini') as outport:
 
 
 # To Do Items:
-# # creation dictionary solution
+# # create dictionary solution
