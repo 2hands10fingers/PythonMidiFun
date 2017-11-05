@@ -1,37 +1,47 @@
+import os
 import webbrowser
 import rtmidi
 import mido
+from playsound import playsound
 
+# SETTINGS
+midicontroller = 'MPK mini'
+midioutput = 'IAC Driver Bus 1'
 
+#CONFIGURATION
 mido.set_backend('mido.backends.rtmidi')
-inport = mido.open_input('MPK mini')
-outport = mido.open_output('IAC Driver Bus 1')
-midiarray = []
+inport = mido.open_input(midicontroller)
+outport = mido.open_output(midioutput)
 
+#FUNCTIONS
+def comsite(site):
+    webbrowser.open('http://' + site + ".com")
+
+def orgsite(site):
+    webbrowser.open('http://' + site + ".org")
+ 
 with mido.open_output('MPK mini') as outport:
     for msg in inport:
 
-        note = str(msg)
-        sp = note.split('=', 5)
-        noteindex = sp[2]
-        midinote = noteindex[:2]
+        if msg.type == 'note_off':
+            continue
 
-        if midinote == '64':
+        midi_note = msg.note
+
+        if midi_note == 64:
             outport.reset()
-            webbrowser.open('http://www.reddit.com')
-
-        elif midinote == '52':
-
-            webbrowser.open('http://www.pitchfork.com')
-
-        elif midinote == '63':
-
-            webbrowser.open('http://www.netflix.com')
-
+            comsite('reddit')
+        elif midi_note == 52:
+            outport.reset()
+            comsite('pitchfork')
+        elif midi_note == 63:
+            outport.reset()
+            comsite('netflix')
+         elif midi_note == 65:
+            orgsite(wikipedia)
         else:
+            print(midi_note)
 
-            print midinote
 
 # To Do Items:
-# # write in error handling for note on and note off
 # # creation dictionary solution
