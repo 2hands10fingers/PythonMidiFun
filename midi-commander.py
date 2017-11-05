@@ -21,7 +21,9 @@ def comsite(site):
 def orgsite(site):
     webbrowser.open('http://' + site + ".org")
  
-## MORE TO COME
+## OS COMMANDS
+def oscommand(commmand):
+    os.system(command)
 
 #WHERE THE MAGIC HAPPENS    
 with mido.open_output('MPK mini') as outport:
@@ -31,7 +33,7 @@ with mido.open_output('MPK mini') as outport:
             continue
 
         midi_note = msg.note
-
+        # # COMMAND LAUNCHERS
         if midi_note == 64:
             outport.reset()
             comsite('reddit')
@@ -43,6 +45,8 @@ with mido.open_output('MPK mini') as outport:
             comsite('netflix')
          elif midi_note == 65:
             orgsite(wikipedia)
+        
+        
         else:
             print(midi_note)
 
